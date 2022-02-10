@@ -37,22 +37,22 @@ class ContactTable extends React.Component {
         let { contact } = this.state;
         console.log(contact.results);
         let list;
-        if (contact.length !== 0 && contact !== 'undefined') {
-            // list = contact.results.map((contacts) =>
-                // <tr>
-                //     <td>{`${contacts.results.name.first} ${contacts.results.name.last}`}</td>
-                //     <td>{`${contacts.results.gender}`}</td>
-                //     <td>{`${contacts.results.email}`}</td>
-                //     <td>{`${contacts.results.phone}`}</td>
-                //     <td>{`${contacts.results.location.city} ${contacts.results.name.country}`}</td>
-                // </tr>
-            // );
-            list=<tr>
-                <td>
-                {contact.results[0].name.first}
-                </td>
-            </tr>
-            console.log(contact.results[0].name.first);
+        if (contact.length !== 0 && contact.results !== 'undefined') {
+            list = contact.results.map((contacts) =>
+                <tr>
+                    <td>{`${contacts.name.first} ${contacts.name.last}`}</td>
+                    <td>{`${contacts.gender}`}</td>
+                    <td>{`${contacts.email}`}</td>
+                    <td>{`${contacts.phone}`}</td>
+                    <td>{`${contacts.location.city} ${contacts.location.country}`}</td>
+                </tr>
+            );
+            // list=<tr>
+            //     <td>
+            //     {contact.results[0].name.first}
+            //     </td>
+            // </tr>
+            // console.log(contact.results[0].name.first);
         }
         else{
             console.log(2);

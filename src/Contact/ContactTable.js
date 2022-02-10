@@ -47,6 +47,11 @@ class ContactTable extends React.Component {
                 //     <td>{`${contacts.results.location.city} ${contacts.results.name.country}`}</td>
                 // </tr>
             // );
+            list=<tr>
+                <td>
+                {contact.results[0].name.first}
+                </td>
+            </tr>
             console.log(contact.results[0].name.first);
         }
         else{

@@ -35,6 +35,7 @@ class ContactInsert extends React.Component {
         event.preventDefault();
         this.props.modalState(false)
         let newcontact={
+            id:Math.random().toString(),
             name:this.state.name,
             sex:this.state.sex,
             email:this.state.email,

@@ -34,8 +34,6 @@ class ContactTable extends React.Component {
                     addContactList: this.props.addContactList
                 }
                 )
-                console.log(1)
-
             }
         }
     }

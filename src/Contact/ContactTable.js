@@ -1,21 +1,5 @@
 import React from "react";
 
-// const ContactDetail = (props) => {
-//     let list = props.contactImformation.map((contact) => 
-//         <tr>
-//             <td>`${contact.result.name.first} ${contact.result.name.last}`</td>
-//             <td>`${contact.result.gender}`</td>
-//             <td>`${contact.result.email}`</td>
-//             <td>`${contact.result.phone}`</td>
-//             <td>`${contact.result.location.city} ${contact.result.name.country}`</td>
-//         </tr>
-//     );
-//     console.log(list);
-//     return (
-//         <tbody>{props}
-//         </tbody>
-//     )
-// }
 
 class ContactTable extends React.Component {
     constructor(props) {
@@ -34,6 +18,7 @@ class ContactTable extends React.Component {
 
     }
     render() {
+        console.log(this.props.addContactList);
         let { contact } = this.state;
         console.log(contact.results);
         let list;

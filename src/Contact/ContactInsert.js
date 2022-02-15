@@ -26,10 +26,13 @@ class ContactInsert extends React.Component {
     locateselectHandle = event =>{
         this.setState({locate:event.target.value});
     }
-    onCancelClick = () =>{
+    onCancelClick = event =>{
+        event.preventDefault();
+
         this.props.modalState(false)
     }
-    onOkClick = () =>{
+    onOkClick = event =>{
+        event.preventDefault();
         this.props.modalState(false)
         let newcontact={
             name:this.state.name,
@@ -39,6 +42,10 @@ class ContactInsert extends React.Component {
             locate:this.state.locate
         }
         this.props.addNewContact(newcontact)
+    }
+    formSubmit = event =>{
+       event.preventDefault();
+
     }
     render() {
         return (
@@ -58,8 +65,8 @@ class ContactInsert extends React.Component {
                 <label>地址</label>
                 <input type="text" value={this.state.locate} onChange={this.locateselectHandle}></input>
                 <br></br>
-                <button type="button" onClick={this.onCancelClick}>取消</button>
-                <button type="button" onClick={this.onOkClick}>確定</button>
+                <button type="submit" onClick={this.onCancelClick}>取消</button>
+                <button type="submit" onClick={this.onOkClick}>確定</button>
             </div>
         )
     }

@@ -5,56 +5,80 @@ class ContactTable extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            contact: []
+            contact: [],
+            addContactList: [],
+            selectcontact:[]
         }
     }
     componentDidMount() {
         fetch("https://randomuser.me/api/").then((res) => res.json()).then((json) => {
             this.setState({
-                contact: json
-            });
-
+                contact: json.results.map(item => ({
+                    id:Math.random().toString(),
+                    name: `${item.name.first} ${item.name.last}`,
+                    sex: item.gender,
+                    email: item.email,
+                    phone: item.phone,
+                    locate: `${item.location.city} ${item.location.country}`
+                })
+                )
+            })
         })
 
     }
+    componentDidUpdate(prevProps, prevState) {
+        if (prevState.addContactList !== this.props.addContactList && this.props.addContactList.length !== 0) {
+            if (this.props.addContactList.length !== 0) {
+                this.setState({
+                    contact: [...prevState.contact, this.props.addContactList],
+                    addContactList: this.props.addContactList
+                }
+                )
+                console.log(1)
+
+            }
+        }
+    }
     render() {
-        console.log(this.props.addContactList);
         let { contact } = this.state;
-        console.log(contact.results);
-        let list;
-        if (contact.length !== 0 && contact.results !== 'undefined') {
-            list = contact.results.map((contacts) =>
-                <tr>
-                    <td>{`${contacts.name.first} ${contacts.name.last}`}</td>
-                    <td>{`${contacts.gender}`}</td>
-                    <td>{`${contacts.email}`}</td>
-                    <td>{`${contacts.phone}`}</td>
-                    <td>{`${contacts.location.city} ${contacts.location.country}`}</td>
-                </tr>
-            );
-            // list=<tr>
-            //     <td>
-            //     {contact.results[0].name.first}
-            //     </td>
-            // </tr>
-            // console.log(contact.results[0].name.first);
+        let selectcontact = [];
+        if(this.props.onSelectedSex !== "*"){
+            for(let i=0;i<=contact.length-1;i++){
+                if(contact[i].sex === this.props.onSelectedSex){
+                    selectcontact.push(contact[i])
+                }
+            }
         }
         else{
-            console.log(2);
+            for(let i=0;i<=contact.length-1;i++){
+                    selectcontact.push(contact[i])               
+            }
         }
-
         return (
             <div>
                 <div>
                     <table>
                         <thead>
-                            <td>名稱</td>
-                            <td>性別</td>
-                            <td>郵件</td>
-                            <td>電話</td>
-                            <td>地址</td>
+                            <tr>
+                            <th>名稱</th>
+                            <th>性別</th>
+                            <th>郵件</th>
+                            <th>電話</th>
+                            <th>地址</th>
+                            </tr>
                         </thead>
-                        <tbody>{list}
+                        <tbody>
+                            {selectcontact.map((contacts) =>
+                                <tr key={contacts.id}>
+                                    <td>{contacts.name}</td>
+                                    <td>{contacts.sex}</td>
+                                    <td>{contacts.email}</td>
+                                    <td>{contacts.phone}</td>
+                                    <td>{contacts.locate}</td>
+
+                                </tr>
+                            )
+                            }
                         </tbody>
                     </table>
                 </div>
